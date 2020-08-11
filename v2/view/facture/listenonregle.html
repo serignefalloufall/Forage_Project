@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>page liste</title>
+		<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+		<style>
+			h1{ 
+				color: #40007d;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="{$url_base}public/image/logo.jpg" class="resize" />
+		<div class="nav navbar navbar-default navbar-fixed-top">
+			<ul class="nav navbar-nav">
+				<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+				<li><a href="{$url_base}">Accueil</a></li>
+				<li><a href="{$url_base}Test/index">Menu page test</a></li>
+				<li><a href="{$url_base}Test/getID/1">Menu page test 2</a></li>
+				<li><a href="{$url_base}Test/liste">Menu page test liste</a></li>
+			</ul>
+		</div>
+		<div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+			<div class="panel panel-info">
+				<div class="panel-heading">Liste  facture non regle</div>
+				<div class="panel-body">
+					<div class="alert alert-success" style="font-size:18px; text-align:justify;">
+
+					</div>
+					{if isset($factures)}
+						{if $factures != null}
+							<table class="table table-bordered table-stripped">
+								<tr>
+									<th>Identifiant</th>
+									<th>Numero facture</th>
+									<th>Date facturation</th>
+									<th>Date payement</th>
+									<th>Prix ht</th>
+									<th>TVA</th>
+									<th>prix ttc</th>
+									<th>Action</th>
+									<th>Action</th>
+								</tr>
+								{foreach from=$factures item=facture}
+									<tr>
+										<td>{$facture['id']}</td>
+										<td>{$facture['num_facture']}</td>
+										<td>{$facture['date_facturation']}</td>
+										<td>{$facture['date_payement']}</td>
+										<td>{$facture['prix_ht']}</td>
+										<td>{$facture['tva']}</td>
+										<td>{$facture['prix_ttc']}</td>
+
+										<td><a href="{$url_base}Facture/delete/{$facture['id']}">Supprimer</a></td>
+										<td><a href="{$url_base}Facture/edit/{$facture['id']}">Editer</a></td>
+									</tr>
+								{/foreach}
+							</table>
+						{else}
+							Liste vide
+						{/if}
+					{/if}
+				</div>
+				<a href="{$url_base}Facture/add">Ajout d'un facture</a>
+			</div>
+		</div>
+		
+	</body>
+</html>

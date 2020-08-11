@@ -1,0 +1,115 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>page liste</title>
+		<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+
+        <script src="{$url_base}public/js/jquery.js"></script>
+        <script src="{$url_base}public/js/jquery.min.js"></script>
+        <script src="{$url_base}public/js/bootstrap.min.js"></script>
+
+        <style>
+			h1{ 
+				color: #40007d;
+			}
+            body{
+                background-color: #F5F5F5;
+            }
+            img {
+                border-radius: 100%;
+                width: 200px;
+                height: 200px;
+
+            }
+		</style>
+	</head>
+	<body>
+		<img src="{$url_base}public/image/f4.png" class="resize" />
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">SEN-FORAGE</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="{$url_base}Accueil/accueil">Accueil</a></li>
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service abonnement
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$url_base}Abonnement/liste">Liste des abonnement</a></li>
+                            <li><a href="{$url_base}Abonnement/add">Enregistrement des abonnements</a></li>
+                            <li><a href="{$url_base}Compteur/liste">Liste des compteur</a></li>
+                            <li><a href="{$url_base}Compteur/listecoupe">Liste des compteur coupe</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service facturation
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$url_base}Facture/liste">Liste des factures regles</a></li>
+                            <li><a href="{$url_base}Facture/add">Enregistrement des factures</a></li>
+                            <li><a href="{$url_base}Reglement/liste">Liste des reglements</a></li>
+                            <li><a href="{$url_base}Reglement/add">Enregistrement des reglements</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service client
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$url_base}Client/liste">Liste des clients</a></li>
+                            <li><a href="{$url_base}Village/liste">Liste des village</a></li>
+                            <li><a href="{$url_base}Village/add">Enregistrement des villages</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </nav>
+		<div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+			<div class="panel panel-default">
+                <div class="panel-heading"><center><h3>LISTE DES ABONNEMENTS</h3></center></div>
+				<div class="panel-body">
+					{if isset($abonnements)}
+						{if $abonnements != null}
+							<table class="table table-bordered table-striped">
+								<tr>
+									<th>Numero</th>
+									<th>Date</th>
+									<th>Client</th>
+									<th>Compteur</th>
+									<th>Description</th>
+									<th>Action</th>
+									<th>Action</th>
+
+								</tr>
+								{foreach from=$abonnements item=abonnement}
+
+									<tr>
+										<td>{$abonnement['numero_abonnement']}</td>
+										<td>{$abonnement['date_abonnement']}</td>
+										<td>{$abonnement['id_client']}</td>
+										<td>{$abonnement['id_compteur']}</td>
+										<td>{$abonnement['description_abonnement']}</td>
+
+										<td><a href="{$url_base}Abonnement/delete/{$abonnement['id']}">Supprimer</a></td>
+										<td><a href="{$url_base}Abonnement/modif/{$abonnement['id']}">Editer</a></td>
+									</tr>
+								{/foreach}
+							</table>
+						{else}
+							Liste vide
+						{/if}
+					{/if}
+				</div>
+				<a href="{$url_base}Abonnement/add">Ajout d'un abonnement</a>
+			</div>
+		</div>
+		
+	</body>
+</html>

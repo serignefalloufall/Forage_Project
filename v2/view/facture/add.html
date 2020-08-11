@@ -1,0 +1,213 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>page get id</title>
+		<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+        <script src="{$url_base}public/js/jquery.js"></script>
+
+        <style>
+            h1{
+                color: #40007d;
+            }
+            #search {
+                width: 350px;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+                background-image: url('searchicon.png');
+                background-position: 10px 10px;
+                background-repeat: no-repeat;
+                padding: 12px 20px 12px 40px;
+                -webkit-transition: width 0.4s ease-in-out;
+                transition: width 0.4s ease-in-out;
+            }
+
+            #search:focus {
+                width: 100%;
+            }
+        </style>
+	</head>
+	<body>
+		<img src="{$url_base}public/image/logo.jpg" class="resize" />
+		<div class="nav navbar navbar-default navbar-fixed-top">
+			<ul class="nav navbar-nav">
+				<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+				<li><a href="{$url_base}">Accueil</a></li>
+				<li><a href="{$url_base}Test/index">Menu page test</a></li>
+				<li><a href="{$url_base}Test/getID/1">Menu page test 2</a></li>
+				<li><a href="{$url_base}Test/liste">Menu page test liste</a></li>
+			</ul>
+		</div>
+		<div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+			<div class="panel panel-info" style="border: none;">
+				<div class="panel-heading panel-info">FACTURATION</div>
+				<div class="panel-body">
+					{if isset($ok)}
+						{if $ok != 0}
+							<div class="alert alert-success">Données ajoutées!</div>
+						{else}
+							<div class="alert alert-danger">Erreur!</div>
+						{/if}
+					{/if}
+					<form method="post" action="{$url_base}Test/add">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th  colspan="3">
+
+                                        <div class="form-wrapper cf">
+                                            <input type="text" name="num" placeholder="Entrez le numero du compteur.." id="search">
+
+                                        </div>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td  colspan="3">
+
+
+
+                                        <div class="row">
+                                            <div class="col-sm-6" style="background-color:white;">
+                                                <label for="nom">Client:</label>
+                                                <input type="text" class="form-control" id="nom" readonly>
+                                            </div>
+
+                                            <div class="col-sm-4" style="background-color:white;">
+                                                <label for="adresse">adresse:</label>
+                                                <input type="text" class="form-control" id="adresse" readonly>
+                                            </div>
+
+                                            <div class="col-sm-2" style="background-color:white;" >
+                                                <label for="abone"> Abonnement N°:</label>
+                                                <input type="text" class="form-control" id="numab" readonly>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td  colspan="3">
+
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3" style="background-color:white;">
+                                                <label for="nom">Date:</label>
+                                                <input type="date" class="form-control" id="date" >
+                                            </div>
+
+                                            <div class="col-sm-3" style="background-color:white;">
+                                                <label for="nom">Nombre de jour:</label>
+                                                <input type="number" class="form-control" id="nbrj" readonly>
+                                            </div>
+                                            <div class="col-sm-3" style="background-color:white;">
+                                                <label for="adresse">Ancien index:</label>
+                                                <input type="number" class="form-control" id="aindex" readonly>
+                                            </div>
+
+                                            <div class="col-sm-3" style="background-color:white;" >
+                                                <label for="abone"> Nouvele index:</label>
+                                                <input type="number" class="form-control" id="nindex" >
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <th>Quantite consome</th>
+                                    <th>Prix </th>
+                                    <th>Montant </th>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" class="form-control" id="qnt" ></td>
+                                    <td><input type="text" class="form-control" id="prix" ></td>
+                                    <td><input type="text" class="form-control" id="mts" ></td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-block">Calculer</button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td >
+                                        THT :
+                                    </td>
+                                    <td><input type="text" class="form-control" id="ht" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td >
+                                        TVA :
+                                    </td>
+                                    <td><input type="text" class="form-control" id="tva" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td >
+                                    <input type="text" class="form-control" id="ttc" placeholder="Prix TTC" readonly>
+
+                                    </td>
+
+                                    <td colspan="2"><input type="text" class="form-control" id="ltr" placeholder="valeur en letre" readonly></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+						<div class="form-group">
+							<input class="btn btn-success" type="submit" name="valider" value="ENvoyer"/>
+							<input class="btn btn-danger" type="reset" name="annuler" value="Annuler"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+        <script>
+            //alert("yess");
+            $(document).ready(function(){
+
+                $("#search").change(function(){
+                    // $("#num_facture").css("backgroundColor","yellow");
+                    var num_fact = $("#search").val();
+
+                    // alert("yess");
+
+                    var urll='{$url_base}Service/getfact';
+                    // alert(urll);
+
+                    $.ajax({
+                        url:urll,
+                        type:'POST',
+                     //   data:'numfact='+num_fact,
+                        data:'action=charger&id='+num_fact,
+                        dataType:"json",
+                        success: function(json){
+
+                            $.each(json, function(index, value){
+                                //$client.append("<option value='"+index+"'>"+value+"</option>");
+                                //$("#montant").val(5);
+                                alert(value);
+                            });
+
+
+                        }
+                    });
+                });
+            });
+        </script>
+	</body>
+</html>

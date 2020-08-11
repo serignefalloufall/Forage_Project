@@ -1,0 +1,95 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>page get id</title>
+    <!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+
+    <script src="{$url_base}public/js/jquery.js"></script>
+    <script src="{$url_base}public/js/jquery.min.js"></script>
+    <script src="{$url_base}public/js/bootstrap.min.js"></script>
+
+
+    <style>
+        h1{
+            color: #40007d;
+        }
+        body{
+            background-color: #F5F5F5;
+        }
+    </style>
+</head>
+<body>
+<img src="{$url_base}public/image/f4.png" class="resize" />
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">SEN-FORAGE</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="{$url_base}Accueil/accueil">Accueil</a></li>
+            <li class="dropdown active">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service abonnement
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Abonnement/liste">Liste des abonnement</a></li>
+                    <li><a href="{$url_base}Abonnement/add">Enregistrement des abonnements</a></li>
+                    <li><a href="{$url_base}Compteur/liste">Liste des compteur</a></li>
+                    <li><a href="{$url_base}Compteur/listecoupe">Liste des compteur coupe</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service facturation
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Facture/liste">Liste des factures regles</a></li>
+                    <li><a href="{$url_base}Facture/add">Enregistrement des factures</a></li>
+                    <li><a href="{$url_base}Reglement/liste">Liste des reglements</a></li>
+                    <li><a href="{$url_base}Reglement/add">Enregistrement des reglements</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service client
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Client/liste">Liste des clients</a></li>
+                    <li><a href="{$url_base}Village/liste">Liste des village</a></li>
+                    <li><a href="{$url_base}Village/add">Enregistrement des villages</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3><center>MODIFICATION ABONNEMENT</center></h3></div>
+        <div class="panel-body">
+            <form method="post" action="{$url_base}Abonnement/update">
+                <div class="form-group">
+                    <label class="control-label">Id abonnement</label>
+                    <input class="form-control" type="text" readonly name="id_abonnement" id="id_abonnement" value="{if isset($abonnement)} {$abonnement['id']} {/if}"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Date abonnement</label>
+                    <input class="form-control" type="text" name="date_abonnement" id="date_abonnement" value="{if isset($abonnement)} {$abonnement['date_abonnement']} {/if}"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Description abonnement</label>
+                    <input class="form-control" type="text" name="description_abonement" id="description_abonnement" value="{if isset($abonnement)} {$abonnement['description_abonnement']} {/if}"/>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-success" type="submit" name="modifier" value="Modifier"/>
+                    <a class="btn btn-primary" href="{$url_base}Abonnement/liste">Retour</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

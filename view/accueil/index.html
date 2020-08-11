@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>page d'authentification</title>
+
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/spinners.css" />
+</head>
+
+<body>
+    <div class="header">
+        <h2>Formulaire d'authentification </h2>
+    </div>
+
+    <form method="post" action="{$url_base}Accueil/connexion">
+        <?php include('errors.php'); ?>
+        <div class="input-group">
+            <label>Login</label>
+            <input type="text" name="login" placeholder="Entrez votre login">
+        </div>
+
+        <div class="input-group">
+            <label>Mot de passe</label>
+            <input type="password" name="password" placeholder="Entrez votre mot de passe">
+        </div>
+
+        <div class="input-group">
+            <button type="submit" class="btn" name="connexion">Se connecter</button>
+        </div>
+        <p>pour tester taper <strong>fallfallou</strong> pour login
+            <p><strong>passer</strong> pour le mot de passe
+                <span class="text-danger align-middle">
+                    {if isset($erreur)}
+                    <p class="text-danger">
+                        <div class="alert alert-danger" style="font-size:18px; text-align:justify;">
+                            {$erreur}
+                        </div>
+                    </p>
+                    {/if}
+                </span>
+
+
+
+    </form>
+</body>
+
+</html>

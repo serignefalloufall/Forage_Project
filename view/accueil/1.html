@@ -1,0 +1,99 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>page d'accueil</title>
+    <!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/fall.css"/>
+
+    <script src="{$url_base}public/js/jquery.js"></script>
+    <script src="{$url_base}public/js/jquery.min.js"></script>
+    <script src="{$url_base}public/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+    <!-- integration de javascript dans le moteur de rendu de vue Smarty -->
+    {literal}
+    <script language=javascript>
+        function load_design() {
+            document.getElementById("design_js").style.color = "#40007d";
+        }
+
+    </script>
+    {/literal}
+    <style>
+        .badge-notify{
+            background:red;
+            position:relative;
+            transform:(-100%, -100%);
+        }
+    </style>
+</head>
+<body onload="load_design()">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">SEN-FORAGE</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{$url_base}Accueil/accueil">Accueil</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service abonnement
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Abonnement/liste">Liste des abonnement</a></li>
+                    <li><a href="{$url_base}Abonnement/add">Enregistrement des abonnements</a></li>
+                    <li><a href="{$url_base}Compteur/liste">Liste des compteur</a></li>
+                    <li><a href="{$url_base}Compteur/listecoupe">Liste des compteur coupe</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Service facturation
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Facture/liste">Liste des factures regles</a></li>
+                    <li><a href="{$url_base}Facture/add">Enregistrement des factures</a></li>
+                    <li><a href="{$url_base}Reglement/liste">Liste des reglements</a></li>
+                    <li><a href="{$url_base}Reglement/add">Enregistrement des reglements</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service client
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Client/liste">Liste des clients</a></li>
+                    <li><a href="{$url_base}Village/liste">Liste des village</a></li>
+                    <li><a href="{$url_base}Village/add">Enregistrement des villages</a></li>
+                </ul>
+            </li>
+
+
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li>
+                <a href="#" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-bell"></span> 12
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+</body>
+</html>

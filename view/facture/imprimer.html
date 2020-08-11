@@ -1,0 +1,234 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>page d'accueil</title>
+    <!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+    <!-- integration de javascript dans le moteur de rendu de vue Smarty -->
+    <script src="{$url_base}public/js/jquery.js"></script>
+    <script src="{$url_base}public/js/jquery.min.js"></script>
+    <script src="{$url_base}public/js/bootstrap.min.js"></script>
+
+<style>
+    body{
+        background-color: #F5F5F5;
+    }
+</style>
+    {literal}
+    <script language=javascript>
+        function load_design() {
+            document.getElementById("design_js").style.color = "#40007d";
+        }
+
+    </script>
+    {/literal}
+</head>
+<body onload="load_design()">
+<img src="{$url_base}public/image/f4.png" class="resize" />
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">SEN-FORAGE</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="{$url_base}Accueil/accueil">Accueil</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service abonnement
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Abonnement/liste">Liste des abonnement</a></li>
+                    <li><a href="{$url_base}Abonnement/add">Enregistrement des abonnements</a></li>
+                    <li><a href="{$url_base}Compteur/liste">Liste des compteur</a></li>
+                    <li><a href="{$url_base}Compteur/listecoupe">Liste des compteur coupe</a></li>
+                </ul>
+            </li>
+            <li class="dropdown active">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service facturation
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Facture/liste">Liste des factures regles</a></li>
+                    <li><a href="{$url_base}Facture/add">Enregistrement des factures</a></li>
+                    <li><a href="{$url_base}Reglement/liste">Liste des reglements</a></li>
+                    <li><a href="{$url_base}Reglement/add">Enregistrement des reglements</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service client
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{$url_base}Client/liste">Liste des clients</a></li>
+                    <li><a href="{$url_base}Village/liste">Liste des village</a></li>
+                    <li><a href="{$url_base}Village/add">Enregistrement des villages</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<script language="javascript" type="text/javascript">
+    function printDiv(divID) {
+        //Get the HTML of div
+        var divElements = document.getElementById(divID).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+
+        //Reset the page's HTML with div's HTML only
+        document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
+
+        //Print Page
+        window.print();
+
+        //Restore orignal HTML
+        document.body.innerHTML = oldPage;
+
+
+    }
+</script>
+
+
+
+<form id="form1" runat="server">
+
+    <div id="printablediv" >
+
+        <div class="container">
+            <div class="table-responsive" style="margin-top:5%;">
+                <table class="table">
+                    <thead >
+                    <tr>
+                        <th>
+                            <div class="card" >
+                                <div class="card-body">
+                                    <h2 class="card-title" style="color: blue;">SEN-FORAGE</h2><br/>
+                                    <h5 class="card-title">Tel :{if isset($facture)}{$facture['tel']}{/if}
+                                    </h5>
+                                    <h5 class="card-title">Adresse : {if isset($facture)}{$facture['adresse']}{/if}</h5>
+
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="card" >
+                                <div class="card-body">
+                                    <h3 class="card-title" style="color: blue;">Facture numero :{if isset($facture)}{$facture['num_facture']}{/if}</h3>
+                                    <h5 class="card-title">Date :{if isset($facture)}{$facture['date_facturation']}{/if}</h5>
+                                    <h5 class="card-title">Abonnement : {if isset($facture)}{$facture['numero_abonnement']}{/if}</h5>
+                                    <h5 class="card-title">Compteur : {if isset($facture)}{$facture['numero_compteur']}{/if}</h5>
+
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr>
+
+                        <td colspan="2">
+                            <div class="row"  style="width: 90%;margin-left: 5%; ">
+
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card" >
+                                        <div class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row"  style="width: 80%;margin-left: 10%; ">
+                                <div class="col-lg-10">
+                                    <table class="table">
+
+                                        <tbody>
+                                        <tr>
+                                            <td>Periode du : {if isset($facture)}{$facture['date_facturation']}{/if}</td>
+                                            <td>Au : {if isset($facture)}{$facture['date_payement']}{/if}</td>
+                                        </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+
+                            <div class="row"  style="width: 80%;margin-left: 10%; ">
+                                <div class="col-lg-10">
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Quantite consome</th>
+                                            <th>Prix litre d'eau</th>
+                                            <th>Montant HT</th>
+                                            <th>TVA 18%</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{if isset($facture)}{$facture['index_chiffre']}{/if}</td>
+                                            <td>{if isset($facture)}{$facture['prix_litre_eau']}{/if}</td>
+                                            <td>{if isset($facture)}{($facture['index_chiffre'])*($facture['prix_litre_eau'])}{/if}</td>
+                                            <td>{if isset($facture)}{(($facture['index_chiffre'])*($facture['prix_litre_eau']))*0.18}{/if}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><h2>MONTANT NET A PAYER : </h2></td>
+                                            <td><h2>{if isset($facture)}{$facture['prix_ttc']}{/if}</h2></td>
+
+                                        </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <center>
+    <button class="btn btn-primary" type="button" value="Print 1st Div" onclick="javascript:printDiv('printablediv')" >Imprimer</button>
+    </center>
+</form>
+</body>
+</html>

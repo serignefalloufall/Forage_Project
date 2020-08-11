@@ -1,0 +1,243 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>page get id</title>
+		<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+
+        <script src="{$url_base}public/js/jquery.js"></script>
+        <script src="{$url_base}public/js/jquery.min.js"></script>
+        <script src="{$url_base}public/js/bootstrap.min.js"></script>
+
+
+        <script>
+            $(document).ready(function(){
+                $("#btncli").click(function(){
+
+                    $(".ansclient").slideUp();
+                    $(".newclient").slideDown();
+                    $("#etat").val(0);
+                });
+                $("#btascli").click(function(){
+                    $("#etat").val(1);
+                    $(".newclient").slideUp();
+                    $(".ansclient").slideDown();
+                });
+            });
+        </script>
+        <style>
+			h1{ 
+				color: #40007d;
+			}
+            body{
+                background-color: #F5F5F5;
+            }
+		</style>
+	</head>
+	<body>
+    <img src="{$url_base}public/image/f4.png" class="resize" />
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">SEN-FORAGE</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="{$url_base}Accueil/accueil">Accueil</a></li>
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle"  data-toggle="dropdown" href="#">Service abonnement
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$url_base}Abonnement/liste">Liste des abonnement</a></li>
+                            <li><a href="{$url_base}Abonnement/add">Enregistrement des abonnements</a></li>
+                            <li><a href="{$url_base}Compteur/liste">Liste des compteur</a></li>
+                            <li><a href="{$url_base}Compteur/listecoupe">Liste des compteur coupe</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service facturation
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$url_base}Facture/liste">Liste des factures regles</a></li>
+                            <li><a href="{$url_base}Facture/add">Enregistrement des factures</a></li>
+                            <li><a href="{$url_base}Reglement/liste">Liste des reglements</a></li>
+                            <li><a href="{$url_base}Reglement/add">Enregistrement des reglements</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service client
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$url_base}Client/liste">Liste des clients</a></li>
+                            <li><a href="{$url_base}Village/liste">Liste des village</a></li>
+                            <li><a href="{$url_base}Village/add">Enregistrement des villages</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <style>
+            .ansclient{
+                display: none;
+            }
+            </style>
+        <form method="post" action="{$url_base}Abonnement/add">
+
+        <div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+                    ABONNEMENT NUMERO :
+                    <div class="form-group" style="display: inline-block">
+                        {if isset($abonnements)}
+
+
+                        <div style="display: none;">
+
+                            {foreach from=$abonnements item=abonnement} {$j++}{/foreach}
+
+                        </div>
+                        <input class="form-control" style="background-color: #2bcbba; border: none;" readonly type="text" name="numero_abonnement" value="Abn-{$date}-{$j+1}"/>
+
+                        <input type="hidden" name="id" readonly value="{$j+1}">
+
+                        {else}
+                        Liste vide
+                        {/if}
+                    </div>
+                </div>
+				<div class="panel-body">
+					{if isset($ok)}
+						{if $ok != 0}
+							<div class="alert alert-success">Votre abonnement a bien été enregistrée avec succés!</div>
+						{else}
+							<div class="alert alert-danger">Erreur</div>
+						{/if}
+					{/if}
+                        <div class="widget-box">
+                            <div>
+                                <button type="button" class="btn btn-success btn-md" id="btncli">Nouveau client</button>
+                                    <button type="button" class="btn btn-info btn-md" id="btascli">Ancien client</button>
+                            </div>
+                            <div class="widget-header">
+                                <h2 class="widget-title"><p class="text-primary">Informations du client</p></h2>
+                            </div>
+                            <input type="hidden" name="etat" value="0" id="etat">
+
+                            <div class="widget-body">
+                                <div class="form-group ansclient" >
+                                    <label class="control-label">Liste des clients</label>
+                                    {if isset($clients)}
+                                    <select name="id_asclient" class="form-control" >
+                                        <option value="" disabled>---choisir un client---</option>
+
+                                        {foreach from=$clients item=client}
+
+                                        <option value="{$client['id']}">{$client['nom_famille']}</option>
+
+                                        {/foreach}
+                                    </select>
+                                    </table>
+                                    {else}
+                                    Liste vide
+                                    {/if}
+                                </div>
+
+                                <div class="widget-main newclient"  >
+
+                                    <div class="form-group">
+
+                                        <label class="control-label">Nom de famille</label>
+                                        <input class="form-control" type="text" name="nom_famille" id="nom_famille"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Adresse</label>
+                                        <input class="form-control" type="text" name="adresse" id="adresse"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Telephone</label>
+                                        <input class="form-control" type="text" name="tel" id="tel"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Village</label>
+                                        {if isset($villages)}
+                                        <select name="id_village" class="form-control" required>
+                                            <option value="" disabled>---choisir un village---</option>
+
+                                            {foreach from=$villages item=village}
+
+                                            <option value="{$village['id']}">{$village['nom_village']}</option>
+
+                                            {/foreach}
+                                        </select>
+                                        </table>
+                                        {else}
+                                        Liste vide
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget-box">
+                            <div class="widget-header">
+                                <h2 class="widget-title"><p class="text-primary">Informations d'abonnement</p></h2>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <div class="form-group">
+                                        <label class="control-label">Date abonnement</label>
+                                        <input class="form-control" type="date" name="date_abonnement" value="{$date}"/>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label">Description abonnement</label>
+                                        <textarea class="form-control" type="text" name="description_abonnement" id="description_abonnement"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        {if isset($compteurs)}
+
+
+                                        <div style="display: none;">
+
+                                        {foreach from=$compteurs item=compteur} {$i++}{/foreach}
+
+                                            </div>
+
+                                            <input type="hidden" name="id_compteur" readonly value="{$i+1}">
+
+                                        </table>
+
+                                        {else}
+                                        Liste vide
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+							<input class="btn btn-success" type="submit" name="valider" value="ENvoyer"/>
+							<input class="btn btn-danger" type="reset" name="annuler" value="Annuler"/>
+						</div>
+
+				</div>
+			</div>
+		</div>
+        </form>
+	</body>
+</html>

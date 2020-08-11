@@ -1,0 +1,199 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>page get id</title>
+		<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+        <script src="{$url_base}public/js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#btncli").click(function(){
+
+                    $(".ansclient").slideUp();
+                    $(".newclient").slideDown();
+                    $("#etat").val(0);
+                });
+                $("#btascli").click(function(){
+                    $("#etat").val(1);
+                    $(".newclient").slideUp();
+                    $(".ansclient").slideDown();
+                });
+            });
+        </script>
+        <style>
+			h1{ 
+				color: #40007d;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="{$url_base}public/image/logo.jpg" class="resize" />
+		<div class="nav navbar navbar-default navbar-fixed-top">
+			<ul class="nav navbar-nav">
+				<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+				<li><a href="{$url_base}">Accueil</a></li>
+				<li><a href="{$url_base}Test/index">Menu page test</a></li>
+				<li><a href="{$url_base}Test/getID/1">Menu page test 2</a></li>
+				<li><a href="{$url_base}Test/liste">Menu page test liste</a></li>
+			</ul>
+		</div>
+
+
+        <style>
+            .ansclient{
+                display: none;
+            }
+            </style>
+        <form method="post" action="{$url_base}Abonnement/add">
+
+        <div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+
+
+			<div class="panel panel-info">
+				<div class="panel-heading">
+                    ABONNEMENT NUMERO :
+                    <div class="form-group" style="display: inline-block">
+                        {if isset($abonnements)}
+
+
+                        <div style="display: none;">
+
+                            {foreach from=$abonnements item=abonnement} {$j++}{/foreach}
+
+                        </div>
+                        <input class="form-control" style="background-color: lightskyblue; border: none;" readonly type="text" name="numero_abonnement" value="Abn{$date}0{$j+1}"/>
+
+                        <input type="hidden" name="id" readonly value="{$j+1}">
+
+                        {else}
+                        Liste vide
+                        {/if}
+                    </div>
+                </div>
+				<div class="panel-body">
+					{if isset($ok)}
+						{if $ok != 0}
+							<div class="alert alert-success">Données ajoutées!</div>
+						{else}
+							<div class="alert alert-danger">Erreur</div>
+						{/if}
+					{/if}
+                        <div class="widget-box">
+                            <div>
+                                <button type="button" class="btn btn-success" id="btncli">Nouveau client</button>
+                                    <button type="button" class="btn btn-info" id="btascli">Ancien client</button>
+                            </div>
+                            <div class="widget-header">
+                                <h4 class="widget-title">Informations du client</h4>
+                            </div>
+                            <input type="hidden" name="etat" value="0" id="etat">
+
+                            <div class="widget-body">
+                                <div class="form-group ansclient" >
+                                    <label class="control-label">Liste des clients</label>
+                                    {if isset($clients)}
+                                    <select name="id_asclient" class="form-control" >
+                                        <option value="" disabled>---choisir un client---</option>
+
+                                        {foreach from=$clients item=client}
+
+                                        <option value="{$client['id']}">{$client['nom_famille']}</option>
+
+                                        {/foreach}
+                                    </select>
+                                    </table>
+                                    {else}
+                                    Liste vide
+                                    {/if}
+                                </div>
+
+                                <div class="widget-main newclient"  >
+
+                                    <div class="form-group">
+                                        <label class="control-label">Nom de famille</label>
+                                        <input class="form-control" type="text" name="nom_famille" id="nom_famille"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Adresse</label>
+                                        <input class="form-control" type="text" name="adresse" id="adresse"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Telephone</label>
+                                        <input class="form-control" type="text" name="tel" id="tel"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Liste des village</label>
+                                        {if isset($villages)}
+                                        <select name="id_village" class="form-control" required>
+                                            <option value="" disabled>---choisir un village---</option>
+
+                                            {foreach from=$villages item=village}
+
+                                            <option value="{$village['id']}">{$village['nom_village']}</option>
+
+                                            {/foreach}
+                                        </select>
+                                        </table>
+                                        {else}
+                                        Liste vide
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget-box">
+                            <div class="widget-header">
+                                <h4 class="widget-title">Informations d'abonnement</h4>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <div class="form-group">
+                                        <label class="control-label">Date abonnement</label>
+                                        <input class="form-control" type="date" name="date_abonnement" value="{$date}"/>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label">Description abonnement</label>
+                                        <textarea class="form-control" type="text" name="description_abonnement" id="description_abonnement"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        {if isset($compteurs)}
+
+
+                                        <div style="display: none;">
+
+                                        {foreach from=$compteurs item=compteur} {$i++}{/foreach}
+
+                                            </div>
+
+                                            <input type="hidden" name="id_compteur" readonly value="{$i+1}">
+
+                                        </table>
+
+                                        {else}
+                                        Liste vide
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+							<input class="btn btn-success" type="submit" name="valider" value="ENvoyer"/>
+							<input class="btn btn-danger" type="reset" name="annuler" value="Annuler"/>
+						</div>
+
+				</div>
+			</div>
+		</div>
+        </form>
+	</body>
+</html>
